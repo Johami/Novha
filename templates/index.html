@@ -1,28 +1,97 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
+{% block title %}Novha · Ropa de trabajo y personalizada{% endblock %}
 
-    <title>Novha</title>
+{% block content %}
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-    >
+<!-- ============ HERO ============ -->
+<section id="inicio" class="novha-hero">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7">
+        <h1 class="mb-3">Encuentra algo<br>hecho para ti</h1>
+        <p class="mb-4">Ropa de trabajo, bordados y productos personalizados para quienes trabajan día y noche. Consulta disponibilidad y pide por WhatsApp.</p>
+        <a href="{{ url_for('catalogo') }}" class="btn btn-novha">Ver catálogo</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
+<!-- ============ CATEGORÍAS ============ -->
+<section class="novha-section">
+  <div class="container">
+    <h2 class="novha-section-title text-center">¿Qué estás buscando?</h2>
+    <p class="novha-section-sub text-center">Explora nuestras categorías principales</p>
 
-<body>
+    <div class="row g-4 row-cols-2 row-cols-md-3">
+      {# TODO: en el futuro esto vendrá desde Flask (BD) #}
+      {% set categorias = [
+        {'nombre':'Chaquetas','img':'chaquetas.jpg'},
+        {'nombre':'Overoles', 'img':'overoles.jpg'},
+        {'nombre':'Ruanas',   'img':'ruanas.jpg'},
+        {'nombre':'Bordados', 'img':'bordados.jpg'},
+        {'nombre':'Cojines',  'img':'cojines.jpg'},
+        {'nombre':'Prendas',  'img':'prendas.jpg'}
+      ] %}
+      {% for cat in categorias %}
+      <div class="col">
+        <a href="{{ url_for('catalogo') }}" class="novha-card">
+          <img src="{{ url_for('static', filename='img/categorias/' + cat.img) }}" alt="{{ cat.nombre }}">
+          <div class="novha-card-body text-center">
+            <h3>{{ cat.nombre }}</h3>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
 
-    <h1>Novha</h1>
+    <div class="text-center mt-4">
+      <a href="{{ url_for('catalogo') }}" class="btn btn-outline-novha">Ver más</a>
+    </div>
+  </div>
+</section>
 
-    <img src="/static/img/logo.png" alt="Logo corporativo empresa Novha">
+<!-- ============ VISÍTANOS ============ -->
+<section id="visitanos" class="novha-section novha-visitanos">
+  <div class="container">
+    <h2 class="novha-section-title text-center mb-5">Visítanos</h2>
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
-    </script>
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <p class="text-sec mb-4">Estamos ubicados en Corabastos, el corazón comercial de Bogotá. Ven a conocer nuestros productos, pedir tu bordado personalizado o consultar precios por volumen.</p>
+        {# TODO: reemplazar por foto real del local #}
+        <img src="{{ url_for('static', filename='img/visitanos.jpg') }}" alt="Nuestro local" class="img-fluid rounded-3" style="border:1px solid var(--borde);">
+      </div>
 
-</body>
-</html>
+      <div class="col-lg-6">
+        <div class="novha-info-item">
+          <div class="novha-info-icon"><i class="bi bi-geo-alt"></i></div>
+          <div>
+            <h4>Dirección</h4>
+            {# TODO: reemplazar por dirección exacta de Corabastos #}
+            <p>Corabastos, Bogotá — Bodega minorista, puesto [POR DEFINIR]</p>
+          </div>
+        </div>
+
+        <div class="novha-info-item">
+          <div class="novha-info-icon"><i class="bi bi-clock"></i></div>
+          <div>
+            <h4>Horario</h4>
+            {# TODO: reemplazar por horario real #}
+            <p>Lunes a sábado · [POR DEFINIR]</p>
+          </div>
+        </div>
+
+        <div class="novha-info-item">
+          <div class="novha-info-icon"><i class="bi bi-whatsapp"></i></div>
+          <div>
+            <h4>Contáctanos</h4>
+            {# TODO: reemplazar por número real #}
+            <p><a href="https://wa.me/573000000000" target="_blank">Escríbenos por WhatsApp</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
