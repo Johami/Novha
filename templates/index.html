@@ -25,16 +25,16 @@
     <div class="row g-4 row-cols-2 row-cols-md-3">
       {# TODO: en el futuro esto vendrá desde Flask (BD) #}
       {% set categorias = [
-        {'nombre':'Chaquetas','img':'chaquetas.jpg'},
-        {'nombre':'Overoles', 'img':'overoles.jpg'},
-        {'nombre':'Ruanas',   'img':'ruanas.jpg'},
-        {'nombre':'Bordados', 'img':'bordados.jpg'},
-        {'nombre':'Cojines',  'img':'cojines.jpg'},
-        {'nombre':'Prendas',  'img':'prendas.jpg'}
+        {'nombre':'Chaquetas','endpoint':'chaquetas','img':'chaquetas.jpg'},
+        {'nombre':'Overoles', 'endpoint':'overoles', 'img':'overoles.jpg'},
+        {'nombre':'Ruanas',   'endpoint':'ruanas',   'img':'ruanas.jpg'},
+        {'nombre':'Bordados', 'endpoint':'bordados', 'img':'bordados.jpg'},
+        {'nombre':'Cojines',  'endpoint':'cojines',  'img':'cojines.jpg'},
+        {'nombre':'Prendas',  'endpoint':'prendas',  'img':'prendas.jpg'}
       ] %}
       {% for cat in categorias %}
       <div class="col">
-        <a href="{{ url_for('catalogo') }}" class="novha-card">
+        <a href="{{ url_for(cat.endpoint) }}" class="novha-card">
           <img src="{{ url_for('static', filename='img/categorias/' + cat.img) }}" alt="{{ cat.nombre }}">
           <div class="novha-card-body text-center">
             <h3>{{ cat.nombre }}</h3>
@@ -49,6 +49,7 @@
     </div>
   </div>
 </section>
+
 
 <!-- ============ VISÍTANOS ============ -->
 <section id="visitanos" class="novha-section novha-visitanos">

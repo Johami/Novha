@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}Chaquetas · Novha{% endblock %}
+
+{% block content %}
+
+<!-- =========================================
+     TÍTULO / HERO DE CATEGORÍA
+========================================== -->
+<section class="novha-hero" style="min-height: 45vh;">
+  <div class="container text-center">
+    <h1 class="mb-3">Chaquetas</h1>
+    <p class="mx-auto mb-0">Diseñadas para acompañarte en cada jornada.</p>
+  </div>
+</section>
+
+
+<!-- =========================================
+     PRODUCTO PRINCIPAL
+========================================== -->
+<section class="novha-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+
+      <div class="col-lg-6">
+        <div class="novha-card">
+          <img
+            src="{{ url_for('static', filename='img/chaqueta-4.jpg') }}"
+            alt="Chaqueta Novha"
+            style="aspect-ratio: 4 / 5;"
+          >
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <h2 class="novha-section-title mb-3">Chaquetas</h2>
+        <p class="text-sec mb-4">
+          Encuentra chaquetas pensadas para ofrecer comodidad, resistencia y estilo.
+          También puedes personalizarlas según tus necesidades.
+        </p>
+
+        <ul class="list-unstyled mb-4">
+          <li class="mb-2">
+            <i class="bi bi-check-lg me-2" style="color: var(--interaccion);"></i>
+            Materiales resistentes
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-check-lg me-2" style="color: var(--interaccion);"></i>
+            Diseños funcionales
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-check-lg me-2" style="color: var(--interaccion);"></i>
+            Diferentes estilos
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-check-lg me-2" style="color: var(--interaccion);"></i>
+            Opción de personalización
+          </li>
+        </ul>
+
+        <a
+          href="https://wa.me/573132422348"
+          target="_blank"
+          class="btn btn-novha"
+        >
+          Personalizar chaqueta
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================================
+     DISEÑOS
+========================================== -->
+<section class="novha-section novha-visitanos">
+  <div class="container">
+
+    <div class="text-center mb-5">
+      <h2 class="novha-section-title">Nuestros diseños</h2>
+      <p class="novha-section-sub">Conoce algunos de nuestros modelos de chaquetas.</p>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- DISEÑO 1 -->
+      <div class="col-md-6 col-lg-4">
+        <article class="novha-card">
+          <img
+            src="{{ url_for('static', filename='img/chaqueta-1.jpg') }}"
+            alt="Chaqueta clásica"
+          >
+          <div class="novha-card-body">
+            <h3 class="mb-1">Chaqueta clásica</h3>
+            <p class="text-sec small mb-0">
+              Diseño cómodo y funcional para el día a día.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <!-- DISEÑO 2 -->
+      <div class="col-md-6 col-lg-4">
+        <article class="novha-card">
+          <img
+            src="{{ url_for('static', filename='img/chaqueta-2.jpg') }}"
+            alt="Chaqueta personalizada"
+          >
+          <div class="novha-card-body">
+            <h3 class="mb-1">Chaqueta personalizada</h3>
+            <p class="text-sec small mb-0">
+              Personalízala con diseños y bordados a tu gusto.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <!-- DISEÑO 3 -->
+      <div class="col-md-6 col-lg-4">
+        <article class="novha-card">
+          <img
+            src="{{ url_for('static', filename='img/chaqueta-3.jpg') }}"
+            alt="Chaqueta de trabajo"
+          >
+          <div class="novha-card-body">
+            <h3 class="mb-1">Chaqueta de trabajo</h3>
+            <p class="text-sec small mb-0">
+              Pensada para acompañarte durante tus jornadas laborales.
+            </p>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================================
+     CTA
+========================================== -->
+<section class="novha-section">
+  <div class="container">
+    <div
+      class="text-center p-5"
+      style="background-color: var(--superficie);
+             border: 1px solid var(--borde);
+             border-radius: 14px;"
+    >
+      <h2 class="novha-section-title mb-3">¿Quieres personalizar tu chaqueta?</h2>
+      <p class="text-sec mb-4">Cuéntanos tu idea y te ayudamos a hacerla realidad.</p>
+      <a
+        href="https://wa.me/573132422348"
+        target="_blank"
+        class="btn btn-novha"
+      >
+        Hablar con nosotros
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
