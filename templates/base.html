@@ -22,9 +22,8 @@
   <nav class="navbar navbar-expand-lg navbar-dark novha-navbar sticky-top">
     <div class="container">
       <a class="navbar-brand" href="{{ url_for('index') }}">
-        {# TODO: reemplazar por logo definitivo #}
-        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Novha" height="42">
-      </a>
+  <img src="{{ url_for('static', filename='img/logo_centrado.jpg') }}" alt="Novha" height="42">
+</a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir menú">
         <span class="navbar-toggler-icon"></span>
@@ -49,8 +48,7 @@
   <!-- ============ FOOTER ============ -->
   <footer id="contacto" class="novha-footer">
     <div class="container text-center">
-      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Novha" height="56" class="mb-3">
-
+     <img src="{{ url_for('static', filename='img/logo_centrado.jpg') }}" alt="Novha" height="56" class="mb-3">
       <div class="novha-social mb-3">
         {# TODO: reemplazar número y enlaces reales #}
         <a href="https://wa.me/573132422348" target="_blank" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
