@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+
+{% block title %}Catálogo · Novha{% endblock %}
+
+{% block content %}
+
+<!-- ============ HERO DEL CATÁLOGO ============ -->
+
+<section class="novha-hero" style="min-height: 42vh;">
+  <div class="container text-center">
+    <h1 class="mb-3">Nuestro catálogo</h1>
+    <p class="mx-auto mb-0" style="max-width: 650px;">
+      Explora nuestras prendas, productos y servicios de personalización.
+      Encuentra lo que necesitas para tu trabajo o cuéntanos qué tienes en mente.
+    </p>
+  </div>
+</section>
+
+<!-- ============ CATEGORÍAS ============ -->
+
+<section class="novha-section">
+  <div class="container">
+
+
+<div class="text-center mb-5">
+  <h2 class="novha-section-title">¿Qué estás buscando?</h2>
+  <p class="novha-section-sub mb-0">
+    Conoce nuestras principales categorías
+  </p>
+</div>
+
+{% set categorias = [
+  {
+    'nombre': 'Chaquetas',
+    'endpoint': 'chaquetas',
+    'img': 'chaquetas.jpg',
+    'descripcion': 'Chaquetas resistentes y funcionales para acompañarte durante tu jornada.'
+  },
+  {
+    'nombre': 'Overoles',
+    'endpoint': 'overoles',
+    'img': 'overoles.jpg',
+    'descripcion': 'Dotación de trabajo pensada para ofrecer comodidad y protección.'
+  },
+  {
+    'nombre': 'Ruanas',
+    'endpoint': 'ruanas',
+    'img': 'ruanas.jpg',
+    'descripcion': 'Ruanas disponibles en diferentes diseños y opciones según disponibilidad.'
+  },
+  {
+    'nombre': 'Bordados',
+    'endpoint': 'bordados',
+    'img': 'bordados.jpg',
+    'descripcion': 'Personaliza prendas con logos, nombres y diseños hechos a tu medida.'
+  },
+  {
+    'nombre': 'Cojines',
+    'endpoint': 'cojines',
+    'img': 'cojines.jpg',
+    'descripcion': 'Cojines personalizados para darle un toque propio a tus espacios.'
+  },
+  {
+    'nombre': 'Polos',
+    'endpoint': 'polos',
+    'img': 'polos.jpg',
+    'descripcion': 'Polos disponibles según modelos, tallas y existencias.'
+  }
+] %}
+
+<div class="row g-4">
+
+  {% for cat in categorias %}
+
+  <div class="col-12 col-md-6 col-lg-4">
+
+    <a href="{{ url_for(cat.endpoint) }}" class="novha-card h-100">
+
+      <img
+        src="{{ url_for('static', filename='img/categorias/' + cat.img) }}"
+        alt="{{ cat.nombre }}"
+      >
+
+      <div class="novha-card-body d-flex flex-column">
+
+        <h3 class="mb-2">
+          {{ cat.nombre }}
+        </h3>
+
+        <p class="text-sec small mb-4">
+          {{ cat.descripcion }}
+        </p>
+
+        <span class="mt-auto"
+              style="color: var(--interaccion); font-size: .9rem; font-weight: 600;">
+          Ver categoría
+          <i class="bi bi-arrow-right ms-1"></i>
+        </span>
+
+      </div>
+
+    </a>
+
+  </div>
+
+  {% endfor %}
+
+</div>
+
+
+  </div>
+</section>
+
+<!-- ============ PERSONALIZACIÓN ============ -->
+
+<section class="novha-section novha-visitanos">
+
+  <div class="container">
+
+
+<div class="row align-items-center g-5">
+
+  <div class="col-lg-6">
+
+    <div class="novha-card">
+      <img
+        src="{{ url_for('static', filename='img/categorias/bordados.jpg') }}"
+        alt="Personalización y bordados Novha"
+        style="aspect-ratio: 4 / 3;"
+      >
+    </div>
+
+  </div>
+
+  <div class="col-lg-6">
+
+    <h2 class="novha-section-title mb-3">
+      Hacemos realidad tus ideas
+    </h2>
+
+    <p class="text-sec mb-4">
+      Muchos de nuestros productos pueden personalizarse. Puedes
+      consultar por bordados, logos, nombres, diseños y pedidos
+      especiales directamente con nosotros.
+    </p>
+
+    <ul class="list-unstyled mb-4">
+
+      <li class="mb-2">
+        <i class="bi bi-check-lg me-2"
+           style="color: var(--interaccion);"></i>
+        Personalización de prendas
+      </li>
+
+      <li class="mb-2">
+        <i class="bi bi-check-lg me-2"
+           style="color: var(--interaccion);"></i>
+        Bordados de logos y nombres
+      </li>
+
+      <li class="mb-2">
+        <i class="bi bi-check-lg me-2"
+           style="color: var(--interaccion);"></i>
+        Pedidos bajo solicitud
+      </li>
+
+      <li class="mb-2">
+        <i class="bi bi-check-lg me-2"
+           style="color: var(--interaccion);"></i>
+        Atención directa por WhatsApp
+      </li>
+
+    </ul>
+
+    <a
+      href="https://wa.me/573132422348"
+      target="_blank"
+      rel="noopener"
+      class="btn btn-novha"
+    >
+      <i class="bi bi-whatsapp me-2"></i>
+      Consultar por WhatsApp
+    </a>
+
+  </div>
+
+</div>
+
+
+  </div>
+
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+
+<section class="novha-section">
+
+  <div class="container">
+
+
+<div
+  class="text-center p-5"
+  style="
+    background-color: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+  "
+>
+
+  <h2 class="novha-section-title mb-3">
+    ¿No encuentras lo que buscas?
+  </h2>
+
+  <p class="text-sec mb-4">
+    Escríbenos y cuéntanos qué necesitas. Te ayudamos a encontrar
+    una opción disponible o a solicitar una personalización.
+  </p>
+
+  <a
+    href="https://wa.me/573132422348"
+    target="_blank"
+    rel="noopener"
+    class="btn btn-novha"
+  >
+    <i class="bi bi-whatsapp me-2"></i>
+    Hablar con nosotros
+  </a>
+
+</div>
+
+
+  </div>
+
+</section>
+
+{% endblock %}

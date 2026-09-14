@@ -1,0 +1,299 @@
+{% extends "base.html" %}
+
+{% block title %}Ruanas · Novha{% endblock %}
+
+{% block content %}
+
+<!-- =========================================
+TÍTULO / HERO DE CATEGORÍA
+========================================== -->
+
+<section class="novha-hero" style="min-height: 45vh;">
+
+
+<div class="container text-center">
+
+    <h1 class="mb-3">Ruanas</h1>
+
+    <p class="mx-auto mb-0">
+        Abrigo, comodidad y diferentes diseños para elegir.
+    </p>
+
+</div>
+
+
+</section>
+
+<!-- =========================================
+PRODUCTO PRINCIPAL
+========================================== -->
+
+<section class="novha-section">
+
+
+<div class="container">
+
+    <div class="row align-items-center g-5">
+
+        <div class="col-lg-6">
+
+            <div class="novha-card">
+
+                <img
+                    src="{{ url_for('static', filename='img/categorias/ruanas.jpg') }}"
+                    alt="Ruanas Novha"
+                    style="aspect-ratio: 4 / 5;"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-6">
+
+            <h2 class="novha-section-title mb-3">
+                Ruanas
+            </h2>
+
+            <p class="text-sec mb-4">
+                Encuentra diferentes opciones de ruanas disponibles
+                según los diseños, tallas y existencias del momento.
+            </p>
+
+            <ul class="list-unstyled mb-4">
+
+                <li class="mb-2">
+
+                    <i
+                        class="bi bi-check-lg me-2"
+                        style="color: var(--interaccion);"
+                    ></i>
+
+                    Diferentes diseños
+
+                </li>
+
+
+                <li class="mb-2">
+
+                    <i
+                        class="bi bi-check-lg me-2"
+                        style="color: var(--interaccion);"
+                    ></i>
+
+                    Tallas según disponibilidad
+
+                </li>
+
+
+                <li class="mb-2">
+
+                    <i
+                        class="bi bi-check-lg me-2"
+                        style="color: var(--interaccion);"
+                    ></i>
+
+                    Opciones de personalización
+
+                </li>
+
+
+                <li class="mb-2">
+
+                    <i
+                        class="bi bi-check-lg me-2"
+                        style="color: var(--interaccion);"
+                    ></i>
+
+                    Consulta de disponibilidad
+
+                </li>
+
+            </ul>
+
+
+            <a
+                href="https://wa.me/573132422348"
+                target="_blank"
+                rel="noopener"
+                class="btn btn-novha"
+            >
+
+                <i class="bi bi-whatsapp me-2"></i>
+
+                Consultar ruanas
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =========================================
+DISEÑOS
+========================================== -->
+
+<section class="novha-section novha-visitanos">
+
+
+<div class="container">
+
+    <div class="text-center mb-5">
+
+        <h2 class="novha-section-title mb-3">
+            Algunos diseños
+        </h2>
+
+        <p class="novha-section-sub mx-auto">
+            Los modelos pueden variar de acuerdo con la disponibilidad.
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+
+        <div class="col-12 col-md-6 col-lg-4">
+
+            <div class="novha-card h-100">
+
+                <img
+                    src="{{ url_for('static', filename='img/ruanas/ruana-1.jpg') }}"
+                    alt="Diseño de ruana Novha"
+                >
+
+                <div class="novha-card-body">
+
+                    <h3 class="h4 mb-2">
+                        Diseño disponible
+                    </h3>
+
+                    <p class="text-sec small mb-0">
+                        Consulta si este diseño se encuentra
+                        disponible actualmente.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-12 col-md-6 col-lg-4">
+
+            <div class="novha-card h-100">
+
+                <img
+                    src="{{ url_for('static', filename='img/ruanas/ruana-2.jpg') }}"
+                    alt="Diseño de ruana Novha"
+                >
+
+                <div class="novha-card-body">
+
+                    <h3 class="h4 mb-2">
+                        Diferentes opciones
+                    </h3>
+
+                    <p class="text-sec small mb-0">
+                        Los colores y diseños disponibles pueden
+                        cambiar según existencias.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-12 col-md-6 col-lg-4">
+
+            <div class="novha-card h-100">
+
+                <img
+                    src="{{ url_for('static', filename='img/ruanas/ruana-3.jpg') }}"
+                    alt="Ruana personalizada Novha"
+                >
+
+                <div class="novha-card-body">
+
+                    <h3 class="h4 mb-2">
+                        Personalización
+                    </h3>
+
+                    <p class="text-sec small mb-0">
+                        También puedes consultar por opciones de
+                        bordado sobre las ruanas disponibles.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- =========================================
+DISPONIBILIDAD
+========================================== -->
+
+<section class="novha-section">
+
+<div class="container">
+
+    <div
+        class="p-4 p-md-5 text-center"
+        style="
+            background-color: var(--superficie);
+            border: 1px solid var(--borde);
+            border-radius: 14px;
+        "
+    >
+
+        <h2 class="novha-section-title mb-3">
+            ¿Viste una que te gustó?
+        </h2>
+
+        <p
+            class="text-sec mx-auto mb-4"
+            style="max-width: 650px;"
+        >
+            Escríbenos y envíanos la referencia que te interesa.
+            Te confirmamos disponibilidad, talla y opciones de
+            personalización.
+        </p>
+
+        <a
+            href="https://wa.me/573132422348"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-novha"
+        >
+
+            <i class="bi bi-whatsapp me-2"></i>
+
+            Consultar disponibilidad
+
+        </a>
+
+    </div>
+
+</div>
+
+</section>
+
+{% endblock %}

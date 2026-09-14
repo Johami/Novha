@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+
+{% block title %}Overoles · Novha{% endblock %}
+
+{% block content %}
+
+<section class="novha-hero" style="min-height: 45vh;">
+    <div class="container text-center">
+        <h1 class="mb-3">Overoles</h1>
+        <p class="mx-auto mb-0">
+            Dotación de trabajo pensada para acompañarte durante cada jornada.
+        </p>
+    </div>
+</section>
+
+<section class="novha-section">
+
+
+<div class="container">
+
+    <div class="row align-items-center g-5">
+
+        <div class="col-lg-6">
+
+            <div class="novha-card">
+
+                <img
+                    src="{{ url_for('static', filename='img/categorias/overoles.jpg') }}"
+                    alt="Overoles de trabajo Novha"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-6">
+
+            <h2 class="novha-section-title mb-3">
+                Overoles de trabajo
+            </h2>
+
+            <p class="text-sec mb-4">
+                Diseñados para quienes necesitan una opción práctica
+                y cómoda para sus jornadas de trabajo.
+            </p>
+
+            <p class="text-sec mb-4">
+                Nuestro overol está compuesto por dos piezas:
+                <strong>chaleco y pantalón</strong>. Puedes adquirir
+                el conjunto completo o consultar por cada pieza.
+            </p>
+
+            <div class="row g-3 mb-4">
+
+                <div class="col-6">
+
+                    <div
+                        class="p-3 h-100"
+                        style="
+                            background-color: var(--elevado);
+                            border: 1px solid var(--borde);
+                            border-radius: 10px;
+                        "
+                    >
+
+                        <i
+                            class="bi bi-person-badge fs-4"
+                            style="color: var(--interaccion);"
+                        ></i>
+
+                        <h3 class="h6 mt-2 mb-1">
+                            Chaleco
+                        </h3>
+
+                        <p class="text-sec small mb-0">
+                            Parte superior del conjunto.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-6">
+
+                    <div
+                        class="p-3 h-100"
+                        style="
+                            background-color: var(--elevado);
+                            border: 1px solid var(--borde);
+                            border-radius: 10px;
+                        "
+                    >
+
+                        <i
+                            class="bi bi-person-standing fs-4"
+                            style="color: var(--interaccion);"
+                        ></i>
+
+                        <h3 class="h6 mt-2 mb-1">
+                            Pantalón
+                        </h3>
+
+                        <p class="text-sec small mb-0">
+                            Parte inferior del conjunto.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="https://wa.me/573132422348"
+                target="_blank"
+                rel="noopener"
+                class="btn btn-novha"
+            >
+                <i class="bi bi-whatsapp me-2"></i>
+                Consultar disponibilidad
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<section class="novha-section novha-visitanos">
+
+
+<div class="container">
+
+    <div class="text-center mb-5">
+
+        <h2 class="novha-section-title mb-3">
+            Características
+        </h2>
+
+        <p class="novha-section-sub mx-auto">
+            Una dotación pensada para el trabajo diario.
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        <div class="col-12 col-md-6 col-lg-3">
+
+            <div class="novha-card h-100 p-4">
+
+                <i
+                    class="bi bi-layers fs-3"
+                    style="color: var(--interaccion);"
+                ></i>
+
+                <h3 class="h5 mt-3">
+                    Tela náutica
+                </h3>
+
+                <p class="text-sec small mb-0">
+                    Material utilizado para la confección de los
+                    overoles.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-12 col-md-6 col-lg-3">
+
+            <div class="novha-card h-100 p-4">
+
+                <i
+                    class="bi bi-box fs-3"
+                    style="color: var(--interaccion);"
+                ></i>
+
+                <h3 class="h5 mt-3">
+                    Forro
+                </h3>
+
+                <p class="text-sec small mb-0">
+                    Opciones de forro en fleece o tafeta.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-12 col-md-6 col-lg-3">
+
+            <div class="novha-card h-100 p-4">
+
+                <i
+                    class="bi bi-rulers fs-3"
+                    style="color: var(--interaccion);"
+                ></i>
+
+                <h3 class="h5 mt-3">
+                    Tallas
+                </h3>
+
+                <p class="text-sec small mb-0">
+                    Tallas disponibles de S a XL.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-12 col-md-6 col-lg-3">
+
+            <div class="novha-card h-100 p-4">
+
+                <i
+                    class="bi bi-palette fs-3"
+                    style="color: var(--interaccion);"
+                ></i>
+
+                <h3 class="h5 mt-3">
+                    Colores
+                </h3>
+
+                <p class="text-sec small mb-0">
+                    Consulta los colores disponibles actualmente.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<section class="novha-section">
+
+<div class="container">
+
+    <div
+        class="p-4 p-md-5 text-center"
+        style="
+            background-color: var(--superficie);
+            border: 1px solid var(--borde);
+            border-radius: 14px;
+        "
+    >
+
+        <h2 class="novha-section-title mb-3">
+            ¿Necesitas personalizar tu dotación?
+        </h2>
+
+        <p
+            class="text-sec mx-auto mb-4"
+            style="max-width: 650px;"
+        >
+            También puedes consultar por bordados de nombres,
+            logos o diseños para complementar tu overol.
+        </p>
+
+        <a
+            href="{{ url_for('bordados') }}"
+            class="btn btn-novha"
+        >
+            Ver bordados
+        </a>
+
+    </div>
+
+</div>
+
+
+</section>
+
+{% endblock %}

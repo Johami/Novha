@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Polos · Novha{% endblock %}
+
+{% block content %}
+
+<section class="novha-hero novha-hero--compacta">
+    <div class="container text-center">
+        <h1>Polos</h1>
+        <p class="mt-3 text-center">
+            Una opción cómoda y versátil para el trabajo, empresas y uso diario.
+        </p>
+    </div>
+</section>
+
+<section class="novha-section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-6">
+                <img
+                    src="{{ url_for('static', filename='img/categorias/polos.jpg') }}"
+                    alt="Polos Novha"
+                    class="img-fluid rounded-4"
+                >
+            </div>
+
+            <div class="col-lg-6">
+                <h2>Polos para diferentes ocasiones</h2>
+
+                <p>
+                    Contamos con polos según disponibilidad. Son una alternativa
+                    práctica para trabajadores, empresas y personas que buscan
+                    una prenda cómoda para su día a día.
+                </p>
+
+                <div class="mt-4">
+
+                    <div class="novha-info-item mb-3">
+                        <div class="novha-info-icon">
+                            <i class="bi bi-check-lg"></i>
+                        </div>
+                        <div>
+                            <strong>Diferentes diseños</strong>
+                            <p class="mb-0">
+                                Consulta los modelos disponibles.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="novha-info-item mb-3">
+                        <div class="novha-info-icon">
+                            <i class="bi bi-palette"></i>
+                        </div>
+                        <div>
+                            <strong>Colores según disponibilidad</strong>
+                            <p class="mb-0">
+                                Te mostramos las opciones disponibles al momento de consultar.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="novha-info-item mb-3">
+                        <div class="novha-info-icon">
+                            <i class="bi bi-pencil"></i>
+                        </div>
+                        <div>
+                            <strong>Opción de bordado</strong>
+                            <p class="mb-0">
+                                Podemos personalizar el polo con nombres, logos o diseños.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="novha-info-item">
+                        <div class="novha-info-icon">
+                            <i class="bi bi-box-seam"></i>
+                        </div>
+                        <div>
+                            <strong>Disponibilidad</strong>
+                            <p class="mb-0">
+                                Algunos modelos dependen del inventario disponible.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mt-4">
+                    <a
+                        href="https://wa.me/573132422348?text=Hola%20Novha%2C%20quiero%20consultar%20los%20polos%20disponibles."
+                        class="btn btn-novha"
+                        target="_blank"
+                    >
+                        <i class="bi bi-whatsapp me-2"></i>
+                        Consultar polos
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="novha-section">
+    <div class="container text-center">
+
+        <h2>¿Quieres personalizarlo?</h2>
+
+        <p class="mt-3">
+            También puedes consultar por bordados para empresas,
+            trabajadores o diseños personalizados.
+        </p>
+
+        <a href="{{ url_for('bordados') }}" class="btn btn-outline-novha mt-3">
+            Ver bordados
+        </a>
+
+    </div>
+</section>
+
+{% endblock %}

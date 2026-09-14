@@ -1,0 +1,333 @@
+{% extends "base.html" %}
+
+{% block title %}Cojines · Novha{% endblock %}
+
+{% block content %}
+
+<section class="novha-hero" style="min-height: 45vh;">
+
+
+<div class="container text-center">
+
+    <h1 class="mb-3">Cojines</h1>
+
+    <p class="mx-auto mb-0">
+        Diseños personalizados para darle un toque propio a tus espacios.
+    </p>
+
+</div>
+
+
+</section>
+
+<section class="novha-section">
+
+
+<div class="container">
+
+    <div class="row align-items-center g-5">
+
+        <div class="col-lg-6">
+
+            <div class="novha-card">
+
+                <img
+                    src="{{ url_for('static', filename='img/categorias/cojines.jpg') }}"
+                    alt="Cojines personalizados Novha"
+                    style="aspect-ratio: 4 / 5;"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-6">
+
+            <h2 class="novha-section-title mb-3">
+                Cojines personalizados
+            </h2>
+
+            <p class="text-sec mb-4">
+                Creamos cojines que pueden llevar diseños, imágenes,
+                nombres o bordados según lo que quieras realizar.
+            </p>
+
+            <p class="text-sec mb-4">
+                Son una opción para quienes buscan algo diferente
+                y quieren convertir una idea o diseño en una pieza
+                personalizada.
+            </p>
+
+            <a
+                href="https://wa.me/573132422348"
+                target="_blank"
+                rel="noopener"
+                class="btn btn-novha"
+            >
+
+                <i class="bi bi-whatsapp me-2"></i>
+
+                Consultar por WhatsApp
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<section class="novha-section novha-visitanos">
+
+
+<div class="container">
+
+    <div class="text-center mb-5">
+
+        <h2 class="novha-section-title mb-3">
+            ¿Qué podemos hacer?
+        </h2>
+
+        <p class="novha-section-sub mx-auto">
+            Cuéntanos qué tienes en mente y revisamos las opciones
+            disponibles para realizar tu pedido.
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        <div class="col-12 col-md-4">
+
+            <div class="novha-card h-100 p-4">
+
+                <i
+                    class="bi bi-image fs-2 mb-3"
+                    style="color: var(--interaccion);"
+                ></i>
+
+                <h3 class="h4 mb-2">
+                    Tu diseño
+                </h3>
+
+                <p class="text-sec small mb-0">
+                    Puedes enviarnos una imagen, logo o referencia
+                    para revisar cómo podemos adaptarla.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-12 col-md-4">
+
+            <div class="novha-card h-100 p-4">
+
+                <i
+                    class="bi bi-brush fs-2 mb-3"
+                    style="color: var(--interaccion);"
+                ></i>
+
+                <h3 class="h4 mb-2">
+                    Personalización
+                </h3>
+
+                <p class="text-sec small mb-0">
+                    Podemos trabajar diferentes ideas y opciones
+                    de bordado para tu cojín.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-12 col-md-4">
+
+            <div class="novha-card h-100 p-4">
+
+                <i
+                    class="bi bi-stars fs-2 mb-3"
+                    style="color: var(--interaccion);"
+                ></i>
+
+                <h3 class="h4 mb-2">
+                    Un resultado propio
+                </h3>
+
+                <p class="text-sec small mb-0">
+                    El objetivo es que el resultado tenga el diseño
+                    que quieres y sea diferente a uno convencional.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<section class="novha-section">
+
+
+<div class="container">
+
+    <div class="text-center mb-5">
+
+        <h2 class="novha-section-title mb-3">
+            Algunos ejemplos
+        </h2>
+
+        <p class="novha-section-sub mx-auto">
+            Estos son algunos trabajos de referencia.
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        <div class="col-12 col-md-6 col-lg-4">
+
+            <div class="novha-card h-100">
+
+                <img
+                    src="{{ url_for('static', filename='img/cojines/cojin-1.jpg') }}"
+                    alt="Cojín personalizado Novha"
+                >
+
+                <div class="novha-card-body">
+
+                    <h3 class="h4 mb-2">
+                        Diseños personalizados
+                    </h3>
+
+                    <p class="text-sec small mb-0">
+                        Trabajos realizados a partir de una referencia
+                        proporcionada por el cliente.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-12 col-md-6 col-lg-4">
+
+            <div class="novha-card h-100">
+
+                <img
+                    src="{{ url_for('static', filename='img/cojines/cojin-2.jpg') }}"
+                    alt="Cojín bordado Novha"
+                >
+
+                <div class="novha-card-body">
+
+                    <h3 class="h4 mb-2">
+                        Bordados
+                    </h3>
+
+                    <p class="text-sec small mb-0">
+                        Personalización mediante bordados para crear
+                        piezas únicas.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-12 col-md-6 col-lg-4">
+
+            <div class="novha-card h-100">
+
+                <img
+                    src="{{ url_for('static', filename='img/cojines/cojin-3.jpg') }}"
+                    alt="Cojín personalizado para vehículo"
+                >
+
+                <div class="novha-card-body">
+
+                    <h3 class="h4 mb-2">
+                        Para tu espacio
+                    </h3>
+
+                    <p class="text-sec small mb-0">
+                        Opciones pensadas especialmente para espacios
+                        personales o vehículos.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<section class="novha-section">
+
+
+<div class="container">
+
+    <div
+        class="p-4 p-md-5 text-center"
+        style="
+            background-color: var(--superficie);
+            border: 1px solid var(--borde);
+            border-radius: 14px;
+        "
+    >
+
+        <h2 class="novha-section-title mb-3">
+            ¿Tienes una idea?
+        </h2>
+
+        <p
+            class="text-sec mx-auto mb-4"
+            style="max-width: 650px;"
+        >
+            Envíanos una imagen o referencia por WhatsApp y
+            cuéntanos qué quieres realizar.
+        </p>
+
+        <a
+            href="https://wa.me/573132422348"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-novha"
+        >
+
+            <i class="bi bi-whatsapp me-2"></i>
+
+            Enviar referencia
+
+        </a>
+
+    </div>
+
+</div>
+
+
+</section>
+
+{% endblock %}

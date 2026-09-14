@@ -5,102 +5,179 @@
 {% block content %}
 
 <section class="novha-hero novha-hero--compacta">
-  <div class="container text-center">
-    <h1 class="mb-3">Bordados</h1>
-    <p class="mx-auto mb-0">Personaliza tus prendas con bordados de alta calidad.</p>
-  </div>
+    <div class="container text-center">
+        <h1>Bordados</h1>
+        <p class="mt-3 text-center">
+            Personaliza tus prendas con nombres, logos y diseños.
+        </p>
+    </div>
 </section>
 
 <section class="novha-section">
-  <div class="container">
-    <div class="row align-items-center g-5">
+    <div class="container">
 
-      <div class="col-lg-6">
-        <div class="novha-card">
-          <img
-            src="{{ url_for('static', filename='img/bordados/bordado-principal.jpg') }}"
-            alt="Bordado Novha"
-            class="novha-img-tall"
-          >
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-6">
+                <img
+                    src="{{ url_for('static', filename='img/bordados/bordado-principal.jpg') }}"
+                    alt="Bordado personalizado Novha"
+                    class="img-fluid rounded-4"
+                >
+            </div>
+
+            <div class="col-lg-6">
+
+                <h2>Tu idea, convertida en bordado</h2>
+
+                <p>
+                    Puedes enviarnos una imagen, logo o referencia y
+                    revisamos contigo cómo llevarla a una prenda o producto.
+                </p>
+
+                <p>
+                    Trabajamos bordados para prendas de trabajo,
+                    empresas, vehículos y diseños personalizados.
+                </p>
+
+                <div class="mt-4">
+
+                    <div class="novha-info-item mb-3">
+                        <div class="novha-info-icon">
+                            <i class="bi bi-image"></i>
+                        </div>
+
+                        <div>
+                            <strong>1. Tú envías la referencia</strong>
+                            <p class="mb-0">
+                                Puedes enviarnos una foto, logo o diseño por WhatsApp.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="novha-info-item mb-3">
+                        <div class="novha-info-icon">
+                            <i class="bi bi-pencil"></i>
+                        </div>
+
+                        <div>
+                            <strong>2. Preparamos el diseño</strong>
+                            <p class="mb-0">
+                                Revisamos la referencia y definimos los detalles del bordado.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="novha-info-item">
+                        <div class="novha-info-icon">
+                            <i class="bi bi-stars"></i>
+                        </div>
+
+                        <div>
+                            <strong>3. Lo convertimos en bordado</strong>
+                            <p class="mb-0">
+                                El diseño pasa a formar parte de tu prenda o producto.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mt-4">
+                    <a
+                        href="https://wa.me/573132422348?text=Hola%20Novha%2C%20quiero%20cotizar%20un%20bordado%20personalizado."
+                        class="btn btn-novha"
+                        target="_blank"
+                    >
+                        <i class="bi bi-whatsapp me-2"></i>
+                        Cotizar bordado
+                    </a>
+                </div>
+
+            </div>
+
         </div>
-      </div>
 
-      <div class="col-lg-6">
-        <h2 class="novha-section-title mb-3">Bordados Novha</h2>
-        <p class="text-sec mb-4">
-          Servicio de bordado computarizado para logos, nombres y diseños.
-          Ideal para uniformes, dotaciones empresariales y prendas personales.
+    </div>
+</section>
+
+<section class="novha-section">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <h2>¿Qué podemos bordar?</h2>
+
+            <p class="mt-3">
+                Personalizamos diferentes productos según el diseño y la disponibilidad.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-3">
+                <div class="novha-card h-100 p-4 text-center">
+                    <i class="bi bi-person-badge fs-1"></i>
+                    <h3 class="h5 mt-3">Prendas de trabajo</h3>
+                    <p class="mb-0">
+                        Nombres, cargos o diseños para prendas de trabajo.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="novha-card h-100 p-4 text-center">
+                    <i class="bi bi-building fs-1"></i>
+                    <h3 class="h5 mt-3">Empresas</h3>
+                    <p class="mb-0">
+                        Logos y diseños para uniformes empresariales.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="novha-card h-100 p-4 text-center">
+                    <i class="bi bi-truck fs-1"></i>
+                    <h3 class="h5 mt-3">Vehículos</h3>
+                    <p class="mb-0">
+                        Diseños para turbos, camionetas y otros vehículos.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="novha-card h-100 p-4 text-center">
+                    <i class="bi bi-palette fs-1"></i>
+                    <h3 class="h5 mt-3">Diseños personalizados</h3>
+                    <p class="mb-0">
+                        Ideas propias, imágenes o referencias.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="novha-section">
+    <div class="container text-center">
+
+        <h2>¿Ya tienes una idea?</h2>
+
+        <p class="mt-3">
+            Envíanos tu referencia y revisamos contigo las opciones.
         </p>
 
-        <ul class="list-unstyled mb-4 novha-lista-check">
-          <li class="mb-2"><i class="bi bi-check-lg me-2"></i>Bordado computarizado</li>
-          <li class="mb-2"><i class="bi bi-check-lg me-2"></i>Logos y nombres personalizados</li>
-          <li class="mb-2"><i class="bi bi-check-lg me-2"></i>Alta durabilidad</li>
-          <li class="mb-2"><i class="bi bi-check-lg me-2"></i>Pedidos por volumen</li>
-        </ul>
-
-        <a href="https://wa.me/573132422348" target="_blank" rel="noopener" class="btn btn-novha">
-          Cotizar bordado
+        <a
+            href="https://wa.me/573132422348?text=Hola%20Novha%2C%20tengo%20una%20idea%20para%20un%20bordado."
+            class="btn btn-novha mt-3"
+            target="_blank"
+        >
+            <i class="bi bi-whatsapp me-2"></i>
+            Hablar por WhatsApp
         </a>
-      </div>
 
     </div>
-  </div>
-</section>
-
-<section class="novha-section novha-visitanos">
-  <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="novha-section-title">Tipos de bordado</h2>
-      <p class="novha-section-sub">Algunos trabajos que realizamos.</p>
-    </div>
-
-    <div class="row g-4">
-
-      <div class="col-md-6 col-lg-4">
-        <article class="novha-card novha-card--producto">
-          <img src="{{ url_for('static', filename='img/bordados/bordado-1.jpg') }}" alt="Bordado de logo">
-          <div class="novha-card-body">
-            <h3 class="mb-1">Logos empresariales</h3>
-            <p class="text-sec small mb-0">Bordado preciso para tu marca o empresa.</p>
-          </div>
-        </article>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <article class="novha-card novha-card--producto">
-          <img src="{{ url_for('static', filename='img/bordados/bordado-2.jpg') }}" alt="Bordado de nombre">
-          <div class="novha-card-body">
-            <h3 class="mb-1">Nombres y placas</h3>
-            <p class="text-sec small mb-0">Identificación personalizada para uniformes.</p>
-          </div>
-        </article>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <article class="novha-card novha-card--producto">
-          <img src="{{ url_for('static', filename='img/bordados/bordado-3.jpg') }}" alt="Bordado decorativo">
-          <div class="novha-card-body">
-            <h3 class="mb-1">Diseños decorativos</h3>
-            <p class="text-sec small mb-0">Detalles que marcan la diferencia.</p>
-          </div>
-        </article>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section class="novha-section">
-  <div class="container">
-    <div class="novha-cta text-center">
-      <h2 class="novha-section-title mb-3">¿Necesitas bordar tus prendas?</h2>
-      <p class="text-sec mb-4">Envíanos tu diseño y te damos una cotización.</p>
-      <a href="https://wa.me/573132422348" target="_blank" rel="noopener" class="btn btn-novha">
-        Enviar diseño
-      </a>
-    </div>
-  </div>
 </section>
 
 {% endblock %}
