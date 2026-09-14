@@ -10,7 +10,6 @@ def index():
 
 @app.route("/catalogo")
 def catalogo():
-    # TODO: en el futuro recibirá los productos desde la BD
     return render_template("catalogo.html")
 
 
@@ -39,9 +38,9 @@ def bordados():
 def cojines():
     return render_template("cojines.html")
 
-@app.route("/prendas")
-def prendas():
-    return render_template("prendas.html")
+@app.route("/polos")
+def polos():
+    return render_template("polos.html")
     
 if __name__ == "__main__":
     app.run(debug=True)

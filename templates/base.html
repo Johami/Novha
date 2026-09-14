@@ -22,7 +22,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark novha-navbar sticky-top">
     <div class="container">
       <a class="navbar-brand" href="{{ url_for('index') }}">
-  <img src="{{ url_for('static', filename='img/logo_centrado.jpg') }}" alt="Novha" height="42">
+  <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Novha" height="42">
 </a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir menú">
@@ -45,24 +45,17 @@
     {% block content %}{% endblock %}
   </main>
 
-  <!-- ============ FOOTER ============ -->
-  <footer id="contacto" class="novha-footer">
-    <div class="container text-center">
-     <img src="{{ url_for('static', filename='img/logo_centrado.jpg') }}" alt="Novha" height="56" class="mb-3">
-      <div class="novha-social mb-3">
-        {# TODO: reemplazar número y enlaces reales #}
-        <a href="https://wa.me/573132422348" target="_blank" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-        <a href="#" target="_blank" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-        <a href="#" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-        <a href="#" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-      </div>
-
-      <p class="novha-copy mb-0">© 2026 Novha. Todos los derechos reservados.</p>
-    </div>
-  </footer>
+<!-- ============ FOOTER ============ -->
+<footer class="novha-footer">
+  <div class="container text-center">
+    <img src="{{ url_for('static', filename='img/logo.JPG') }}" alt="Novha" height="38" class="mb-2">
+    <p class="novha-copy mb-0">
+      Hecho en Corabastos, Bogotá · © 2026 Novha
+    </p>
+  </div>
+</footer>
 
   <!-- ============ WHATSAPP FLOTANTE ============ -->
-  {# TODO: reemplazar por número real #}
   <a href="https://wa.me/573132422348" class="novha-wa" target="_blank" aria-label="Escríbenos por WhatsApp">
     <i class="bi bi-whatsapp"></i>
   </a>

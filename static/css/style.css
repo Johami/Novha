@@ -241,3 +241,40 @@ a { text-decoration: none; }
 
 /* ---------- Utilidades ---------- */
 .text-sec { color: var(--texto-sec); }
+
+
+/* ---------- Footer extendido ---------- */
+.novha-tagline {
+  color: var(--texto-sec);
+  font-size: .9rem;
+  max-width: 260px;
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  .novha-tagline { margin: 0; }
+}
+
+.novha-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.novha-footer-links a {
+  color: var(--blanco);
+  font-size: .9rem;
+  font-weight: 500;
+  transition: color .2s ease;
+}
+.novha-footer-links a:hover { color: var(--interaccion); }
+
+.novha-footer-divider {
+  border-color: var(--borde);
+  opacity: 1;
+  margin: 2rem 0 1.25rem;
+}
+
+.novha-btn-wa {
+  padding: .6rem 1.4rem;
+  font-size: .9rem;
+}

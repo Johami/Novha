@@ -30,7 +30,7 @@
         {'nombre':'Ruanas',   'endpoint':'ruanas',   'img':'ruanas.jpg'},
         {'nombre':'Bordados', 'endpoint':'bordados', 'img':'bordados.jpg'},
         {'nombre':'Cojines',  'endpoint':'cojines',  'img':'cojines.jpg'},
-        {'nombre':'Prendas',  'endpoint':'prendas',  'img':'prendas.jpg'}
+        {'nombre':'Polos',  'endpoint':'polos',  'img':'polos.jpg'}
       ] %}
       {% for cat in categorias %}
       <div class="col">
@@ -58,18 +58,29 @@
 
     <div class="row g-5 align-items-center">
       <div class="col-lg-6">
-        <p class="text-sec mb-4">Estamos ubicados en Corabastos, el corazón comercial de Bogotá. Ven a conocer nuestros productos, pedir tu bordado personalizado o consultar precios por volumen.</p>
-        {# TODO: reemplazar por foto real del local #}
-        <img src="{{ url_for('static', filename='img/visitanos.jpg') }}" alt="Nuestro local" class="img-fluid rounded-3" style="border:1px solid var(--borde);">
+        <p class="text-sec mb-4">Estamos en la Bodega Popular Minorista de Corabastos. Ven a conocer nuestros productos, pedir tu bordado personalizado o consultar precios por volumen.</p>
+        <img src="{{ url_for('static', filename='img/visitanos.jpg') }}" alt="Nuestro local en Corabastos" class="img-fluid rounded-3" style="border:1px solid var(--borde);">
       </div>
 
       <div class="col-lg-6">
+
         <div class="novha-info-item">
           <div class="novha-info-icon"><i class="bi bi-geo-alt"></i></div>
           <div>
             <h4>Dirección</h4>
-            {# TODO: reemplazar por dirección exacta de Corabastos #}
-            <p>Corabastos, Bogotá — Bodega minorista, puesto [POR DEFINIR]</p>
+            <p>
+              Bodega Popular Minorista, Puerta 17, Local 641.<br>
+              Central de Abastos de Bogotá (Corabastos).<br>
+              Av. Carrera 80 # 2-51, Localidad de Kennedy, Bogotá.
+            </p>
+          </div>
+        </div>
+
+        <div class="novha-info-item">
+          <div class="novha-info-icon"><i class="bi bi-signpost-2"></i></div>
+          <div>
+            <h4>Cómo llegar</h4>
+            <p>Ingresa por la <strong>Puerta 7</strong> (Carrera 38): tendrás un acceso directo a las puerta 17 de la Bodega Minorista.</p>
           </div>
         </div>
 
@@ -77,8 +88,7 @@
           <div class="novha-info-icon"><i class="bi bi-clock"></i></div>
           <div>
             <h4>Horario</h4>
-            {# TODO: reemplazar por horario real #}
-            <p>Lunes a sábado · [POR DEFINIR]</p>
+            <p>Todos los días · 2:00 a. m. — 2:00 p. m.</p>
           </div>
         </div>
 
@@ -86,10 +96,10 @@
           <div class="novha-info-icon"><i class="bi bi-whatsapp"></i></div>
           <div>
             <h4>Contáctanos</h4>
-            {# TODO: reemplazar por número real #}
-            <p><a href="https://wa.me/573000000000" target="_blank">Escríbenos por WhatsApp</a></p>
+            <p><a href="https://wa.me/573132422348" target="_blank">Escríbenos por WhatsApp</a></p>
           </div>
         </div>
+
       </div>
     </div>
   </div>
