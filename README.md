@@ -1,408 +1,306 @@
-# \# Novha - Catálogo con Persistencia Políglota
+# 🛍️ Novha - Catálogo con Persistencia Políglota
 
-# 
+**Catálogo web interactivo para un negocio de ropa y personalización en
+Corabastos, Bogotá.**
 
-# Catálogo web interactivo para un negocio de ropa y personalización en Corabastos, Bogotá.
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=flat-square&logo=flask&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-07405E?style=flat-square&logo=sqlite&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=flat-square&logo=mongodb&logoColor=white)
 
-# 
+------------------------------------------------------------------------
 
-# \## Descripción
+## 📖 Descripción del Proyecto
 
-# 
+**Novha** es un negocio de confección y personalización de prendas de
+trabajo. Esta aplicación implementa una arquitectura de **Persistencia
+Políglota**, combinando lo mejor de dos mundos para gestionar el
+catálogo:
 
-# Novha es un negocio de confección y personalización de prendas de trabajo. Esta aplicación implementa una arquitectura de persistencia políglota usando:
+-   🗄️ **SQLite:** Datos estructurados del catálogo (productos).
+-   🍃 **MongoDB Atlas:** Características variables por producto
+    (tallas, colores, materiales, forros).
+-   ⚡ **Flask:** API REST que combina ambas bases de datos en tiempo
+    real.
 
-# 
+------------------------------------------------------------------------
 
-# \- SQLite: datos estructurados del catálogo (productos).
+## 🏗️ Arquitectura
 
-# \- MongoDB Atlas: características variables por producto (tallas, colores, materiales, forros).
+``` text
++-----------------------------+
+|    Frontend (Vue/Bootstrap) |
++--------------+--------------+
+               | HTTP/JSON
+               v
++-----------------------------+
+|         Flask API           |
+|           /api/*            |
++--------------+--------------+
+               |
+        +------+-------+
+        |              |
+        v              v
++-------------+   +-------------------+
+|   SQLite    |   |      MongoDB      |
+|  productos  |   |  configuraciones |
+|  usuarios   |   | (caract. variables)|
++-------------+   +-------------------+
+```
 
-# \- Flask: API REST que combina ambas bases de datos.
+### ¿Por qué dos bases de datos?
 
-# 
+-   Los **productos** tienen campos comunes (nombre, categoría, precio)
+    que se adaptan perfectamente a SQL.
+-   Sus **características son variables**: una chaqueta tiene talla,
+    color y tipo de cremallera; un cojín tiene tamaño y tipo de bordado;
+    un overol tiene forro y tipo. En SQL esto requeriría columnas que
+    quedarían nulas (`NULL`) para la mayoría de productos. En MongoDB
+    cada documento guarda **solo lo que aplica**.
 
-# \## Tecnologías
+------------------------------------------------------------------------
 
-# 
+## 🚀 Instalación y Ejecución
 
-# | Componente | Tecnología |
+### Requisitos previos
 
-# |---|---|
+-   Python 3.10+
+-   Cuenta en MongoDB Atlas (gratuita)
 
-# | Backend | Python 3.12 + Flask 3.1 |
+### Pasos
 
-# | Base de datos SQL | SQLite (vía `sqlite3` estándar) |
+1.  Clonar el repositorio:
 
-# | Base de datos NoSQL | MongoDB Atlas (vía `pymongo`) |
+    ``` bash
+    git clone https://github.com/Johami/Novha.git
+    cd Novha
+    ```
 
-# | Frontend | HTML5 + CSS3 + Bootstrap 5 + Jinja2 |
+2.  Crear y activar entorno virtual:
 
-# | CORS | Flask-CORS |
+    ``` bash
+    python -m venv .venv
+    ```
 
-# | Variables de entorno | python-dotenv |
+    **Windows (PowerShell):**
 
-# 
+    ``` powershell
+    .venv\Scripts\Activate.ps1
+    ```
 
-# \## Arquitectura
+    **Linux/macOS:**
 
-# 
+    ``` bash
+    source .venv/bin/activate
+    ```
 
-# ```text
+3.  Instalar dependencias:
 
-# +-----------------------------+
+    ``` bash
+    pip install -r requirements.txt
+    ```
 
-# |    Frontend (Vue/Bootstrap) |
+4.  Configurar variables de entorno. Crea un archivo `.env` en la raíz
+    del proyecto con:
 
-# +--------------+--------------+
+    ``` env
+    MONGO_URI=mongodb+srv://usuario:password@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority
+    MONGO_DB=novha_db
+    ```
 
-# &#x20;              | HTTP/JSON
+    Reemplaza los valores de ejemplo por las credenciales de tu propio
+    clúster de MongoDB Atlas.
 
-# &#x20;              v
+5.  Crear la base de datos SQLite con los datos iniciales:
 
-# +-----------------------------+
+    ``` bash
+    python init_db.py
+    ```
 
-# |         Flask API           |
+6.  Iniciar el servidor:
 
-# |           /api/\*            |
+    ``` bash
+    python app.py
+    ```
 
-# +--------------+--------------+
+    El servidor estará disponible en `http://localhost:5000`.
 
-# &#x20;              |
+> **Opcional:** Para poblar MongoDB con configuraciones de ejemplo,
+> ejecuta `python seed_mongo.py` desde otra terminal, con el entorno
+> virtual activado.
 
-# &#x20;       +------+-------+
+------------------------------------------------------------------------
 
-# &#x20;       |              |
+## 📡 Endpoints de la API
 
-# &#x20;       v              v
+  --------------------------------------------------------------------------------------------------
+  Método                Endpoint                                  Base de datos     Descripción
+  --------------------- -------------------------------------- -------------------- ----------------
+  `GET`                 `/api/`                                        ---          Índice de la API
+                                                                                    con lista de
+                                                                                    endpoints
 
-# +-------------+   +-------------------+
+  **Productos**                                                                     
 
-# |   SQLite    |   |      MongoDB      |
+  `GET`                 `/api/productos`                              SQLite        Listar productos
+                                                                                    activos
 
-# |  productos  |   |  configuraciones  |
+  `GET`                 `/api/productos?categoria=Chaquetas`          SQLite        Filtrar por
+                                                                                    categoría
 
-# |  usuarios   |   | (caract. variables)|
+  `GET`                 `/api/productos/<id>`                         SQLite        Ver un producto
 
-# +-------------+   +-------------------+
+  `POST`                `/api/productos`                              SQLite        Crear producto
 
-# ```
+  `PUT`                 `/api/productos/<id>`                         SQLite        Actualizar
+                                                                                    producto
 
-# 
+  `DELETE`              `/api/productos/<id>`                         SQLite        Desactivar
+                                                                                    producto (soft
+                                                                                    delete)
 
-# Por qué dos bases de datos:
+  **Configuraciones**                                                               
 
-# \- Los productos tienen campos comunes (nombre, categoría, precio) que se adaptan perfectamente a SQL.
+  `GET`                 `/api/configuraciones/<producto_id>`         MongoDB        Ver
+                                                                                    configuración
 
-# \- Sus características son variables: una chaqueta tiene talla, color y tipo de cremallera; un cojín tiene tamaño y tipo de bordado; un overol tiene forro y tipo. En SQL esto requeriría columnas que quedarían nulas para la mayoría de productos. En MongoDB cada documento guarda solo lo que aplica.
+  `POST`                `/api/configuraciones`                       MongoDB        Crear
+                                                                                    configuración
+                                                                                    (valida producto
+                                                                                    en SQL)
 
-# 
+  `PUT`                 `/api/configuraciones/<producto_id>`         MongoDB        Actualizar
+                                                                                    configuración
 
-# \## Instalación y ejecución
+  `DELETE`              `/api/configuraciones/<producto_id>`         MongoDB        Eliminar
+                                                                                    configuración
 
-# 
+  **Combinado**                                                                     
 
-# \### Requisitos previos
+  `GET`                 `/api/productos/<id>/detalle`            **SQL + NoSQL**    Producto y
+                                                                                    configuración en
+                                                                                    una sola
+                                                                                    respuesta
+  --------------------------------------------------------------------------------------------------
 
-# \- Python 3.10+
+------------------------------------------------------------------------
 
-# \- Cuenta en MongoDB Atlas (gratuita)
+## 📊 Estructura de Datos
 
-# 
+### SQLite: Tabla `productos`
 
-# \### Pasos
+  -----------------------------------------------------------------------
+  Campo                   Tipo                    Descripción
+  ----------------------- ----------------------- -----------------------
+  `id`                    INTEGER PK              Identificador único
 
-# 
+  `nombre`                TEXT                    Nombre del producto
 
-# ```bash
+  `categoria`             TEXT                    Categoría (Chaquetas,
+                                                  Overoles, etc.)
 
-# \# 1. Clonar el repositorio
+  `descripcion`           TEXT                    Descripción general
 
-# git clone https://github.com/Johami/Novha.git
+  `precio_referencia`     REAL                    Precio orientativo
+                                                  (`NULL` = "Consultar")
 
-# cd Novha
+  `imagen_principal`      TEXT                    Ruta de la imagen
 
-# 
+  `activo`                INTEGER                 `1` = activo, `0` =
+                                                  desactivado
 
-# \# 2. Crear y activar entorno virtual
+  `creado_en`             TEXT                    Fecha de creación
+  -----------------------------------------------------------------------
 
-# python -m venv .venv
+### SQLite: Tabla `usuarios` (preparada para JWT futuro)
 
-# \# Windows:
+  Campo             Tipo          Descripción
+  ----------------- ------------- -------------------------
+  `id`              INTEGER PK    Identificador único
+  `email`           TEXT UNIQUE   Correo del usuario
+  `password_hash`   TEXT          Contraseña hasheada
+  `rol`             TEXT          `"cliente"` o `"admin"`
 
-# .venv\\Scripts\\Activate.ps1
+### MongoDB: Colección `configuraciones`
 
-# \# Linux/Mac:
+Cada documento tiene `_id = producto_id` de SQLite y estructura
+variable. Ejemplo para el producto 1 (Chaqueta clásica):
 
-# source .venv/bin/activate
+``` json
+{
+  "_id": 1,
+  "caracteristicas": {
+    "talla": ["S", "M", "L", "XL"],
+    "color_tela": ["Negro", "Azul", "Beige"],
+    "material": ["Nautica"],
+    "tipo_cremallera": ["Metalica", "Plastica"]
+  },
+  "especificaciones": "Consulta colores disponibles"
+}
+```
 
-# 
+> El overol (`id=4`) tiene `forro` y `tipo` que la chaqueta no tiene. El
+> cojín (`id=6`) tiene `tamano_bordado`. Eso justifica MongoDB: **cada
+> producto guarda solo sus características aplicables**.
 
-# \# 3. Instalar dependencias
+------------------------------------------------------------------------
 
-# pip install -r requirements.txt
+## 📸 Evidencias de Ejecución
 
-# 
+Las capturas de pantalla del funcionamiento están ubicadas en la carpeta
+`/docs`:
 
-# \# 4. Configurar variables de entorno
+1.  `01-api-index.png` - Índice de la API
+2.  `02-productos-sql.png` - 7 productos desde SQLite
+3.  `03-detalle-sin-config.png` - Producto sin configuración
+    (`configuracion: null`)
+4.  `04-detalle-con-config.png` - Producto y configuración combinados
+    (SQL + NoSQL)
+5.  `05-atlas-coleccion.png` - Colección configuraciones en MongoDB
+    Atlas
+6.  `06-sqlite-tabla.png` - Tabla productos en SQLite (DB Browser)
 
-# \# Crear un archivo .env en la raíz con:
+------------------------------------------------------------------------
 
-# MONGO\_URI=mongodb+srv://usuario:password@cluster0.xxxxx.mongodb.net/?retryWrites=true\&w=majority
+## 📂 Estructura del Proyecto
 
-# MONGO\_DB=novha\_db
+``` text
+Novha/
+├── app.py              # Punto de entrada Flask + rutas HTML y API
+├── api.py              # Blueprint con los endpoints de la API REST
+├── db.py               # Conexiones a SQLite y MongoDB
+├── init_db.py          # Crea la base SQLite con 7 productos iniciales
+├── seed_mongo.py       # Puebla MongoDB con configuraciones de ejemplo
+├── auth.py             # (Reservado para autenticación JWT)
+├── requirements.txt    # Dependencias
+├── .env.example        # Plantilla de variables de entorno
+├── static/             # CSS, JS e imágenes
+├── templates/          # Plantillas HTML (Jinja2)
+└── docs/               # Capturas de evidencias
+```
 
-# 
+------------------------------------------------------------------------
 
-# \# 5. Crear base de datos SQLite con datos iniciales
+## 🔒 Seguridad
 
-# python init\_db.py
+-   El archivo `.env` con credenciales reales **no se sube a GitHub**
+    (debe estar incluido en `.gitignore`).
+-   Solo se sube `.env.example` con valores ficticios.
+-   La base SQLite `novha.db` tampoco se sube; se regenera con
+    `init_db.py`.
 
-# 
+------------------------------------------------------------------------
 
-# \# 6. Arrancar el servidor
+## 👥 Autores
 
-# python app.py
+-   **Johami Silva** 
+-   **Julian Suarez** 
 
-# ```
+------------------------------------------------------------------------
 
-# 
+## 📚 Referencias
 
-# El servidor estará disponible en `http://localhost:5000`.
-
-# 
-
-# Para poblar MongoDB con configuraciones de ejemplo (opcional, en otra terminal):
-
-# ```bash
-
-# python seed\_mongo.py
-
-# ```
-
-# 
-
-# \## Endpoints de la API
-
-# 
-
-# | Método | Endpoint | Base de datos | Descripción |
-
-# |---|---|---|---|
-
-# | GET | `/api/` | - | Índice de la API con lista de endpoints |
-
-# | \*\*PRODUCTOS (SQLite)\*\* | | | |
-
-# | GET | `/api/productos` | SQLite | Listar productos activos |
-
-# | GET | `/api/productos?categoria=Chaquetas` | SQLite | Filtrar por categoría |
-
-# | GET | `/api/productos/<id>` | SQLite | Ver un producto |
-
-# | POST | `/api/productos` | SQLite | Crear producto |
-
-# | PUT | `/api/productos/<id>` | SQLite | Actualizar producto |
-
-# | DELETE | `/api/productos/<id>` | SQLite | Desactivar producto (soft delete) |
-
-# | \*\*CONFIGURACIONES (MongoDB)\*\* | | | |
-
-# | GET | `/api/configuraciones/<producto\_id>` | MongoDB | Ver configuración |
-
-# | POST | `/api/configuraciones` | MongoDB | Crear configuración (valida producto en SQL) |
-
-# | PUT | `/api/configuraciones/<producto\_id>` | MongoDB | Actualizar configuración |
-
-# | DELETE | `/api/configuraciones/<producto\_id>` | MongoDB | Eliminar configuración |
-
-# | \*\*COMBINADO\*\* | | | |
-
-# | GET | `/api/productos/<id>/detalle` | SQL + Mongo | Producto (SQLite) + configuración (MongoDB) en una sola respuesta |
-
-# 
-
-# \## Estructura de datos
-
-# 
-
-# \### SQLite: tabla `productos`
-
-# 
-
-# | Campo | Tipo | Descripción |
-
-# |---|---|---|
-
-# | id | INTEGER PK | Identificador único |
-
-# | nombre | TEXT | Nombre del producto |
-
-# | categoria | TEXT | Categoría (Chaquetas, Overoles, etc.) |
-
-# | descripcion | TEXT | Descripción general |
-
-# | precio\_referencia | REAL | Precio orientativo (NULL = "Consultar") |
-
-# | imagen\_principal | TEXT | Ruta de la imagen |
-
-# | activo | INTEGER | 1 = activo, 0 = desactivado |
-
-# | creado\_en | TEXT | Fecha de creación |
-
-# 
-
-# \### SQLite: tabla `usuarios` (preparada para autenticación futura)
-
-# 
-
-# | Campo | Tipo | Descripción |
-
-# |---|---|---|
-
-# | id | INTEGER PK | Identificador único |
-
-# | email | TEXT UNIQUE | Correo del usuario |
-
-# | password\_hash | TEXT | Contraseña hasheada |
-
-# | nombre | TEXT | Nombre del usuario |
-
-# | rol | TEXT | "cliente" o "admin" |
-
-# | activo | INTEGER | 1 = activo |
-
-# | creado\_en | TEXT | Fecha de creación |
-
-# 
-
-# \### MongoDB: colección `configuraciones`
-
-# 
-
-# Cada documento tiene `\_id = producto\_id` de SQLite y estructura variable. Ejemplo para el producto 1 (Chaqueta clásica):
-
-# 
-
-# ```json
-
-# {
-
-# &#x20; "\_id": 1,
-
-# &#x20; "caracteristicas": {
-
-# &#x20;   "talla": \["S", "M", "L", "XL"],
-
-# &#x20;   "color\_tela": \["Negro", "Azul", "Beige"],
-
-# &#x20;   "material": \["Nautica"],
-
-# &#x20;   "tipo\_cremallera": \["Metalica", "Plastica"]
-
-# &#x20; },
-
-# &#x20; "especificaciones": "Consulta colores disponibles"
-
-# }
-
-# ```
-
-# 
-
-# El overol (id=4) tiene forro y tipo que la chaqueta no tiene. El cojín (id=6) tiene tamano\_bordado que ninguno de los otros tiene. Eso es exactamente lo que justifica MongoDB: cada producto guarda solo sus características aplicables.
-
-# 
-
-# \## Evidencias de ejecución
-
-# 
-
-# Las capturas están en la carpeta `/docs`:
-
-# 
-
-# 1\. `01-api-index.png` - Índice de la API
-
-# 2\. `02-productos-sql.png` - 7 productos desde SQLite
-
-# 3\. `03-detalle-sin-config.png` - Producto sin configuración (configuracion: null)
-
-# 4\. `04-detalle-con-config.png` - Producto + configuración combinados (SQL + NoSQL)
-
-# 5\. `05-atlas-coleccion.png` - Colección configuraciones en MongoDB Atlas (3 documentos)
-
-# 6\. `06-sqlite-tabla.png` - Tabla productos en SQLite (7 registros)
-
-# 
-
-# \## Estructura del proyecto
-
-# 
-
-# ```text
-
-# Novha/
-
-# ├── app.py              # Punto de entrada Flask + registro de rutas HTML y API
-
-# ├── api.py              # Blueprint con los 12 endpoints de la API REST
-
-# ├── db.py               # Conexiones a SQLite y MongoDB
-
-# ├── init\_db.py          # Crea la base SQLite con 7 productos iniciales
-
-# ├── seed\_mongo.py       # Puebla MongoDB con 3 configuraciones de ejemplo
-
-# ├── auth.py             # (Reservado para autenticación JWT)
-
-# ├── requirements.txt    # Dependencias
-
-# ├── .env.example        # Plantilla de variables de entorno
-
-# ├── static/             # CSS, JS e imágenes
-
-# ├── templates/          # Plantillas HTML (Jinja2)
-
-# ├── docs/               # Capturas de evidencias
-
-# └── README.md
-
-# ```
-
-# 
-
-# \## Seguridad
-
-# 
-
-# \- El archivo `.env` con credenciales reales no se sube a GitHub (está en `.gitignore`).
-
-# \- Solo se sube `.env.example` con valores ficticios.
-
-# \- La base SQLite `novha.db` tampoco se sube (se regenera con `init\_db.py`).
-
-# 
-
-# \## Autores
-
-# 
-
-# \- Johami Silva 
-
-# \- Julian Suarez
-
-# 
-
-# \## Referencias
-
-# 
-
-# \- \[Flask Documentation](https://flask.palletsprojects.com/)
-
-# \- \[PyMongo Documentation](https://pymongo.readthedocs.io/)
-
-# \- \[MongoDB Atlas](https://www.mongodb.com/atlas/database)
-
-# \- \[SQLite Documentation](https://www.sqlite.org/docs.html)
-
+-   [Flask Documentation](https://flask.palletsprojects.com/)
+-   [PyMongo Documentation](https://pymongo.readthedocs.io/)
+-   [MongoDB Atlas](https://www.mongodb.com/atlas/database)
+-   [SQLite Documentation](https://www.sqlite.org/docs.html)
