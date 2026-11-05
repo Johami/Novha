@@ -27,3 +27,6 @@ Thumbs.db
 novha.db
 docs/*.png
 !docs/.gitkeep
+
+# Backups
+*.bak
