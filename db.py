@@ -5,7 +5,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "novha.db")
+ruta_actual = os.path.dirname(os.path.abspath(__file__))
+ruta_env = os.path.join(ruta_actual, ".env")
+load_dotenv(ruta_env)
+
+DB_PATH = os.path.join(ruta_actual, "novha.db")
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017")
 MONGO_DB = os.getenv("MONGO_DB", "novha_db")
 
