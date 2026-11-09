@@ -73,7 +73,7 @@
 
 
 <!-- =========================================
-     DISEÑOS
+     DISEÑOS DINÁMICOS CON VUE.JS
 ========================================== -->
 <section class="novha-section novha-visitanos">
   <div class="container">
@@ -83,57 +83,44 @@
       <p class="novha-section-sub">Conoce algunos de nuestros modelos de chaquetas.</p>
     </div>
 
-    <div class="row g-4">
-
-      <!-- DISEÑO 1 -->
-      <div class="col-md-6 col-lg-4">
-        <article class="novha-card">
-          <img
-            src="{{ url_for('static', filename='img/chaqueta-1.jpg') }}"
-            alt="Chaqueta clásica"
-          >
-          <div class="novha-card-body">
-            <h3 class="mb-1">Chaqueta clásica</h3>
-            <p class="text-sec small mb-0">
-              Diseño cómodo y funcional para el día a día.
-            </p>
-          </div>
-        </article>
+    <!-- Aquí Vue toma el control -->
+    <div id="app-chaquetas">
+      
+      <!-- Estado de Carga -->
+      <div v-if="cargando" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status" style="color: var(--interaccion) !important;"></div>
+        <p class="mt-3 text-sec">Cargando catálogo...</p>
       </div>
 
-      <!-- DISEÑO 2 -->
-      <div class="col-md-6 col-lg-4">
-        <article class="novha-card">
-          <img
-            src="{{ url_for('static', filename='img/chaqueta-2.jpg') }}"
-            alt="Chaqueta personalizada"
-          >
-          <div class="novha-card-body">
-            <h3 class="mb-1">Chaqueta personalizada</h3>
-            <p class="text-sec small mb-0">
-              Personalízala con diseños y bordados a tu gusto.
-            </p>
-          </div>
-        </article>
+      <!-- Si la base de datos no devuelve nada -->
+      <div v-else-if="productos.length === 0" class="text-center py-5 text-sec">
+        <i class="bi bi-inbox fs-1 mb-3 d-block"></i>
+        <p>No hay diseños de chaquetas disponibles en este momento.</p>
       </div>
 
-      <!-- DISEÑO 3 -->
-      <div class="col-md-6 col-lg-4">
-        <article class="novha-card">
-          <img
-            src="{{ url_for('static', filename='img/chaqueta-3.jpg') }}"
-            alt="Chaqueta de trabajo"
-          >
-          <div class="novha-card-body">
-            <h3 class="mb-1">Chaqueta de trabajo</h3>
-            <p class="text-sec small mb-0">
-              Pensada para acompañarte durante tus jornadas laborales.
-            </p>
-          </div>
-        </article>
-      </div>
+      <!-- Si hay productos, los dibujamos -->
+      <div v-else class="row g-4">
+        
+        <div class="col-md-6 col-lg-4" v-for="prod in productos" :key="prod.id">
+          <a :href="'/producto/' + prod.id" class="novha-card h-100 text-decoration-none">
+            <img :src="'/static/' + prod.imagen_principal" :alt="prod.nombre">
+            
+            <div class="novha-card-body">
+              <h3 class="mb-1" v-text="prod.nombre"></h3>
+              <p class="text-sec small mb-3" v-text="prod.descripcion"></p>
+              
+              <div class="d-flex justify-content-between align-items-center mt-auto">
+                <!-- Usamos v-text para evitar que Jinja2 lea las llaves -->
+                <span class="fw-bold" style="color: var(--interaccion);" v-text="prod.precio_referencia ? '$' + prod.precio_referencia : 'Consultar'"></span>
+                <span class="badge" style="background-color: var(--elevado); border: 1px solid var(--borde);">Ver detalles</span>
+              </div>
+            </div>
+          </a>
+        </div>
 
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -162,4 +149,41 @@
   </div>
 </section>
 
+{% endblock %}
+
+
+<!-- =========================================
+     SCRIPTS DE VUE.JS
+========================================== -->
+{% block scripts %}
+<script>
+  const { createApp, ref, onMounted } = Vue;
+
+  createApp({
+    setup() {
+      const productos = ref([]);
+      const cargando = ref(true);
+
+      const cargarDatos = async () => {
+        try {
+          const res = await fetch('/api/productos?categoria=Chaquetas');
+          if (!res.ok) throw new Error("Error en la respuesta del servidor");
+          
+          const data = await res.json();
+          productos.value = data;
+        } catch (error) {
+          console.error("Error al cargar productos:", error);
+        } finally {
+          cargando.value = false;
+        }
+      };
+
+      onMounted(() => {
+        cargarDatos();
+      });
+
+      return { productos, cargando };
+    }
+  }).mount('#app-chaquetas');
+</script>
 {% endblock %}
