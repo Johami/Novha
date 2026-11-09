@@ -16,32 +16,27 @@
   </div>
 </section>
 
-<!-- ============ CATEGORÍAS ============ -->
+<!-- ============ CATEGORÍAS (Vue.js) ============ -->
 <section class="novha-section">
   <div class="container">
     <h2 class="novha-section-title text-center">¿Qué estás buscando?</h2>
     <p class="novha-section-sub text-center">Explora nuestras categorías principales</p>
 
-    <div class="row g-4 row-cols-2 row-cols-md-3">
-      {# TODO: en el futuro esto vendrá desde Flask (BD) #}
-      {% set categorias = [
-        {'nombre':'Chaquetas','endpoint':'chaquetas','img':'chaquetas.jpg'},
-        {'nombre':'Overoles', 'endpoint':'overoles', 'img':'overoles.jpg'},
-        {'nombre':'Ruanas',   'endpoint':'ruanas',   'img':'ruanas.jpg'},
-        {'nombre':'Bordados', 'endpoint':'bordados', 'img':'bordados.jpg'},
-        {'nombre':'Cojines',  'endpoint':'cojines',  'img':'cojines.jpg'},
-        {'nombre':'Polos',  'endpoint':'polos',  'img':'polos.jpg'}
-      ] %}
-      {% for cat in categorias %}
-      <div class="col">
-        <a href="{{ url_for(cat.endpoint) }}" class="novha-card">
-          <img src="{{ url_for('static', filename='img/categorias/' + cat.img) }}" alt="{{ cat.nombre }}">
+    <div id="app-inicio" class="row g-4 row-cols-2 row-cols-md-3">
+      <!-- Mostramos un spinner mientras carga -->
+      <div v-if="cargando" class="col-12 text-center py-4">
+        <div class="spinner-border text-primary"></div>
+      </div>
+
+      <!-- Vue dibuja las categorías -->
+      <div v-else class="col" v-for="cat in categorias" :key="cat.nombre">
+        <a :href="'/' + cat.endpoint" class="novha-card">
+          <img :src="'/static/img/categorias/' + cat.img" :alt="cat.nombre">
           <div class="novha-card-body text-center">
-            <h3>{{ cat.nombre }}</h3>
+            <h3 v-text="cat.nombre"></h3>
           </div>
         </a>
       </div>
-      {% endfor %}
     </div>
 
     <div class="text-center mt-4">
@@ -49,7 +44,6 @@
     </div>
   </div>
 </section>
-
 
 <!-- ============ VISÍTANOS ============ -->
 <section id="visitanos" class="novha-section novha-visitanos">
@@ -63,19 +57,13 @@
       </div>
 
       <div class="col-lg-6">
-
         <div class="novha-info-item">
           <div class="novha-info-icon"><i class="bi bi-geo-alt"></i></div>
           <div>
             <h4>Dirección</h4>
-            <p>
-              Bodega Popular Minorista, Puerta 17, Local 641.<br>
-              Central de Abastos de Bogotá (Corabastos).<br>
-              Av. Carrera 80 # 2-51, Localidad de Kennedy, Bogotá.
-            </p>
+            <p>Bodega Popular Minorista, Puerta 17, Local 641.<br>Central de Abastos de Bogotá (Corabastos).<br>Av. Carrera 80 # 2-51, Localidad de Kennedy, Bogotá.</p>
           </div>
         </div>
-
         <div class="novha-info-item">
           <div class="novha-info-icon"><i class="bi bi-signpost-2"></i></div>
           <div>
@@ -83,7 +71,6 @@
             <p>Ingresa por la <strong>Puerta 7</strong> (Carrera 38): tendrás un acceso directo a las puerta 17 de la Bodega Minorista.</p>
           </div>
         </div>
-
         <div class="novha-info-item">
           <div class="novha-info-icon"><i class="bi bi-clock"></i></div>
           <div>
@@ -91,7 +78,6 @@
             <p>Todos los días · 2:00 a. m. — 2:00 p. m.</p>
           </div>
         </div>
-
         <div class="novha-info-item">
           <div class="novha-info-icon"><i class="bi bi-whatsapp"></i></div>
           <div>
@@ -99,10 +85,38 @@
             <p><a href="https://wa.me/573132422348" target="_blank">Escríbenos por WhatsApp</a></p>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </section>
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const { createApp, ref, onMounted } = Vue;
+
+  createApp({
+    setup() {
+      const categorias = ref([]);
+      const cargando = ref(true);
+
+      onMounted(() => {
+        // Usamos un arreglo fijo de categorías (como en tu diseño original)
+        // pero podríamos hacer fetch a /api/productos y agrupar por categoría
+        categorias.value = [
+          { nombre: 'Chaquetas', endpoint: 'chaquetas', img: 'chaquetas.jpg' },
+          { nombre: 'Overoles', endpoint: 'overoles', img: 'overoles.jpg' },
+          { nombre: 'Ruanas', endpoint: 'ruanas', img: 'ruanas.jpg' },
+          { nombre: 'Bordados', endpoint: 'bordados', img: 'bordados.jpg' },
+          { nombre: 'Cojines', endpoint: 'cojines', img: 'cojines.jpg' },
+          { nombre: 'Polos', endpoint: 'polos', img: 'polos.jpg' }
+        ];
+        cargando.value = false;
+      });
+
+      return { categorias, cargando };
+    }
+  }).mount('#app-inicio');
+</script>
 {% endblock %}
