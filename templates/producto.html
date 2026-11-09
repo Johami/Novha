@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle de Producto · Novha{% endblock %}
+
+{% block content %}
+<section class="novha-section">
+  <div class="container" id="app-producto">
+    
+    <!-- Estado de Carga -->
+    <div v-if="cargando" class="text-center py-5">
+      <div class="spinner-border text-primary" role="status" style="color: var(--interaccion) !important;"></div>
+      <p class="mt-3 text-sec">Cargando detalles del producto...</p>
+    </div>
+
+    <!-- Si hay un error (ej. el producto no existe) -->
+    <div v-else-if="error" class="alert alert-danger">
+      <i class="bi bi-exclamation-triangle me-2"></i> {{ error }}
+      <br><br>
+      <a href="/chaquetas" class="btn btn-outline-danger">Volver a las chaquetas</a>
+    </div>
+
+    <!-- Si el producto carga correctamente -->
+    <div v-else class="row g-5">
+      <!-- Columna Izquierda: Imagen (SQL) -->
+      <div class="col-lg-6">
+        <div class="novha-card">
+          <img :src="'/static/' + producto.imagen_principal" :alt="producto.nombre" style="aspect-ratio: 4/5;">
+        </div>
+      </div>
+      
+      <!-- Columna Derecha: Información (SQL) y Características (NoSQL) -->
+      <div class="col-lg-6">
+        <h1 class="novha-section-title mb-3" v-text="producto.nombre"></h1>
+        <p class="text-sec mb-4" v-text="producto.descripcion"></p>
+        
+        <h3 class="h4 mb-4" style="color: var(--interaccion);">
+          <span v-text="producto.precio_referencia ? '$' + producto.precio_referencia : 'Consultar precio'"></span>
+        </h3>
+
+        <!-- Aquí mostramos las características variables de MongoDB -->
+        <div v-if="configuracion" class="p-4" style="background-color: var(--superficie); border: 1px solid var(--borde); border-radius: 10px;">
+          <h4 class="h5 mb-3 text-white">Características disponibles</h4>
+          
+          <!-- Iteramos sobre las características del documento de Mongo -->
+          <div v-for="(valores, caracteristica) in configuracion.caracteristicas" :key="caracteristica" class="mb-3">
+            <strong style="text-transform: capitalize; color: var(--interaccion);" v-text="caracteristica.replace('_', ' ')"></strong>
+            <div class="mt-2">
+              <span v-for="valor in valores" :key="valor" class="badge bg-secondary me-2 p-2">
+                <span v-text="valor"></span>
+              </span>
+            </div>
+          </div>
+          
+          <p class="text-sec small mt-4 mb-0" v-text="configuracion.especificaciones"></p>
+        </div>
+        
+        <div v-else class="alert alert-info p-4">
+          <i class="bi bi-info-circle me-2"></i> Este producto aún no tiene características registradas en el catálogo.
+        </div>
+
+        <!-- Botón de WhatsApp -->
+        <div class="mt-5">
+          <a :href="'https://wa.me/573132422348?text=Hola Novha, quiero más información sobre ' + producto.nombre" 
+             target="_blank" class="btn btn-novha btn-lg w-100">
+            <i class="bi bi-whatsapp me-2"></i> Consultar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+  const { createApp, ref, onMounted } = Vue;
+
+  createApp({
+    setup() {
+      const producto = ref(null);
+      const configuracion = ref(null);
+      const cargando = ref(true);
+      const error = ref(null);
+
+      // 1. Extraemos el ID del producto desde la URL (ej: /producto/1)
+      const pathParts = window.location.pathname.split('/');
+      const productoId = pathParts[pathParts.length - 1];
+
+      onMounted(async () => {
+        try {
+          // 2. Consultamos el endpoint combinado ⭐
+          const res = await fetch(`/api/productos/${productoId}/detalle`);
+          
+          if (!res.ok) {
+            throw new Error("El producto no existe o fue desactivado.");
+          }
+          
+          const data = await res.json();
+          producto.value = data.producto;
+          configuracion.value = data.configuracion; // Será null si no tiene config en Mongo
+          
+        } catch (err) {
+          error.value = err.message;
+        } finally {
+          cargando.value = false;
+        }
+      });
+
+      return { producto, configuracion, cargando, error };
+    }
+  }).mount('#app-producto');
+</script>
+{% endblock %}

@@ -17,10 +17,9 @@ def catalogo():
     return render_template("catalogo.html")
 
 
-# ⚠️ Ruta eliminada temporalmente: producto.html no existe todavía
-# @app.route("/producto/<slug>")
-# def producto(slug):
-#     return render_template("producto.html", slug=slug)
+@app.route("/producto/<int:id>")
+def producto(id):
+    return render_template("producto.html")
 
 
 @app.route("/chaquetas")
