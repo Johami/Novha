@@ -17,11 +17,6 @@ def catalogo():
     return render_template("catalogo.html")
 
 
-@app.route("/producto/<int:id>")
-def producto(id):
-    return render_template("producto.html")
-
-
 @app.route("/chaquetas")
 def chaquetas():
     return render_template("chaquetas.html")
@@ -50,6 +45,16 @@ def cojines():
 @app.route("/polos")
 def polos():
     return render_template("polos.html")
+
+
+@app.route("/producto/<int:id>")
+def producto(id):
+    return render_template("producto.html")
+
+
+@app.errorhandler(404)
+def pagina_no_encontrada(e):
+    return render_template("404.html"), 404
 
 
 if __name__ == "__main__":
