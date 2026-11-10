@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Página no encontrada · Novha{% endblock %}
+{% block content %}
+<section class="novha-section text-center" style="min-height: 60vh; display: flex; align-items: center;">
+  <div class="container">
+    <h1 class="display-1" style="color: var(--interaccion);">404</h1>
+    <h2 class="novha-section-title mb-4">Página no encontrada</h2>
+    <p class="text-sec mb-4">Lo sentimos, la página que buscas no existe o fue movida.</p>
+    <a href="{{ url_for('index') }}" class="btn btn-novha">Volver al inicio</a>
+  </div>
+</section>
+{% endblock %}
