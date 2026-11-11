@@ -126,7 +126,7 @@ def eliminar_config(producto_id):
         return jsonify({"error": "Configuración no encontrada"}), 404
     return jsonify({"mensaje": "Configuración eliminada"})
 
-# ═══════════════════ ⭐ COMBINADO SQL + NoSQL ═══════════════════
+# ═══════════════════ COMBINADO SQL + NoSQL ═══════════════════
 
 @api.get("/productos/<int:id>/detalle")
 def detalle_combinado(id):
@@ -144,18 +144,6 @@ def detalle_combinado(id):
         config = None
 
     return jsonify({"producto": dict(row), "configuracion": config})
-
-# ═══════════════════ AUTH (Entrega JWT — mañana) ═══════════════════
-
-# TODO Entrega JWT: descomentar y mover a auth.py
-#
-# @api.post("/auth/register")
-# def register():
-#     ...hash password con werkzeug.security...
-#
-# @api.post("/auth/login")
-# def login():
-#     ...verificar hash + generar JWT...
 
 # ═══════════════════ ÍNDICE DE LA API ═══════════════════
 
