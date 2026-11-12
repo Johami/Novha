@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Registro · Novha{% endblock %}
+ 
+{# Pantalla completa: sin navbar ni footer #}
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+ 
+{% block content %}
+<section class="novha-auth novha-auth--reverse">
+ 
+  <!-- ============ LADO VISUAL ============ -->
+  <aside class="novha-auth-visual">
+    <a href="{{ url_for('index') }}" aria-label="Novha, ir al inicio">
+      <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Novha" height="42" class="novha-auth-logo">
+    </a>
+ 
+    <div class="novha-auth-quote">
+      <p>Hacemos realidad tus ideas.</p>
+    </div>
+  </aside>
+ 
+  <!-- ============ LADO FORMULARIO ============ -->
+  <div class="novha-auth-panel">
+ 
+    <a href="{{ url_for('catalogo') }}" class="novha-auth-back">
+      <i class="bi bi-arrow-left me-2"></i>Volver al catálogo
+    </a>
+ 
+    <div class="novha-auth-box">
+      <h1 class="novha-auth-title">Crea tu cuenta</h1>
+      <p class="text-sec mb-4">Regístrate para guardar tus diseños favoritos.</p>
+ 
+      {% with msgs = get_flashed_messages(with_categories=true) %}
+        {% for cat, msg in msgs %}
+          <div class="alert alert-{{ cat }} novha-alert" data-bs-theme="dark" role="alert">{{ msg }}</div>
+        {% endfor %}
+      {% endwith %}
+ 
+      <form method="POST" action="{{ url_for('auth_web.registro') }}">
+ 
+        <div class="novha-field">
+          <input type="text" id="nombre" name="nombre" placeholder=" " autocomplete="name" required>
+          <label for="nombre">Nombre completo</label>
+        </div>
+ 
+        <div class="novha-field">
+          <input type="email" id="email" name="email" placeholder=" " autocomplete="email" required>
+          <label for="email">Correo electrónico</label>
+        </div>
+ 
+        <div class="novha-field">
+          <input type="password" id="password" name="password" placeholder=" " minlength="6" autocomplete="new-password" required>
+          <label for="password">Contraseña</label>
+          <button type="button" class="novha-field-toggle" data-toggle-pass aria-label="Mostrar contraseña">
+            <i class="bi bi-eye"></i>
+          </button>
+        </div>
+        <small class="novha-field-hint">Mínimo 6 caracteres.</small>
+ 
+        <div class="novha-field">
+          <input type="password" id="confirm" name="confirm" placeholder=" " minlength="6" autocomplete="new-password" required>
+          <label for="confirm">Confirmar contraseña</label>
+          <button type="button" class="novha-field-toggle" data-toggle-pass aria-label="Mostrar contraseña">
+            <i class="bi bi-eye"></i>
+          </button>
+        </div>
+ 
+        <button type="submit" class="btn btn-novha btn-novha-wide mt-3">Crear cuenta</button>
+      </form>
+ 
+      <p class="novha-auth-switch">
+        ¿Ya tienes cuenta?
+        <a href="{{ url_for('auth_web.login') }}" class="novha-link">Inicia sesión</a>
+      </p>
+    </div>
+ 
+  </div>
+</section>
+{% endblock %}
+ 
+{% block scripts %}
+<script>
+  // Mostrar / ocultar contraseña
+  document.querySelectorAll('[data-toggle-pass]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var input = btn.closest('.novha-field').querySelector('input');
+      var show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      btn.querySelector('i').className = show ? 'bi bi-eye-slash' : 'bi bi-eye';
+      btn.setAttribute('aria-label', show ? 'Ocultar contraseña' : 'Mostrar contraseña');
+    });
+  });
+ 
+  // Aviso si las contraseñas no coinciden
+  var pass = document.getElementById('password');
+  var confirma = document.getElementById('confirm');
+  function validarCoincidencia() {
+    confirma.setCustomValidity(pass.value !== confirma.value ? 'Las contraseñas no coinciden' : '');
+  }
+  pass.addEventListener('input', validarCoincidencia);
+  confirma.addEventListener('input', validarCoincidencia);
+</script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Mi perfil · Novha{% endblock %}
+
+{% block content %}
+<section class="novha-perfil">
+  <div class="container py-5">
+
+    <div class="novha-perfil-head mb-4">
+      <h1>Hola, {{ usuario.nombre.split()|first }}</h1>
+      <p class="text-sec">Bienvenido a tu cuenta Novha.</p>
+    </div>
+
+    <div class="novha-perfil-card">
+
+      <h2>Mis datos</h2>
+
+      <p>
+        <strong>Nombre:</strong> {{ usuario.nombre }}
+      </p>
+
+      <p>
+        <strong>Correo:</strong> {{ usuario.email }}
+      </p>
+
+      <p class="mb-0">
+        <strong>Miembro desde:</strong> {{ usuario.creado_en }}
+      </p>
+
+      <hr>
+
+      <div class="d-flex flex-wrap gap-2">
+        <a href="{{ url_for('catalogo') }}"
+           class="btn btn-novha">
+          Ver catálogo
+        </a>
+
+        <a href="{{ url_for('auth_web.logout') }}"
+           class="btn btn-outline-novha">
+          Cerrar sesión
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+{% endblock %}

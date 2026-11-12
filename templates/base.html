@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,22 +13,27 @@
   <!-- Google Fonts: Lora + Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
   <!-- Estilos propios -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <!-- Vue 3 CDN -->
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
+
 <body>
 
   <!-- ============ NAVBAR ============ -->
+   {% block navbar %}
   <nav class="navbar navbar-expand-lg navbar-dark novha-navbar sticky-top">
     <div class="container">
       <a class="navbar-brand" href="{{ url_for('index') }}">
-  <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Novha" height="42">
-</a>
+        <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Novha" height="42">
+      </a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir menú">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal"
+        aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir menú">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -37,25 +43,36 @@
           <li class="nav-item"><a class="nav-link" href="{{ url_for('catalogo') }}">Catálogo</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}#visitanos">Visítanos</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}#contacto">Contacto</a></li>
+          {% if current_user %}
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('auth_web.perfil') }}"><i
+                class="bi bi-person-circle"></i> {{ current_user.nombre }}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('auth_web.logout') }}">Salir</a></li>
+          {% else %}
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('auth_web.login') }}">Ingresar</a></li>
+          <li class="nav-item"><a class="btn btn-light btn-sm text-dark ms-lg-2" href="{{ url_for('auth_web.registro') }}">Registrarse</a></li>
+          {% endif %}
         </ul>
       </div>
     </div>
   </nav>
+  {% endblock %}
 
   <!-- ============ CONTENIDO ============ -->
   <main>
     {% block content %}{% endblock %}
   </main>
 
-<!-- ============ FOOTER ============ -->
-<footer class="novha-footer">
-  <div class="container text-center">
-    <img src="{{ url_for('static', filename='img/logo.JPG') }}" alt="Novha" height="38" class="mb-2">
-    <p class="novha-copy mb-0">
-      Hecho en Corabastos, Bogotá · © 2026 Novha
-    </p>
-  </div>
-</footer>
+  <!-- ============ FOOTER ============ -->
+   {% block footer %}
+  <footer class="novha-footer">
+    <div class="container text-center">
+      <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Novha" height="38" class="mb-2">
+      <p class="novha-copy mb-0">
+        Hecho en Corabastos, Bogotá · © 2026 Novha
+      </p>
+    </div>
+  </footer>
+  {% endblock %}
 
   <!-- ============ WHATSAPP FLOTANTE ============ -->
   <a href="https://wa.me/573132422348" class="novha-wa" target="_blank" aria-label="Escríbenos por WhatsApp">
@@ -67,4 +84,5 @@
 
   {% block scripts %}{% endblock %}
 </body>
+
 </html>
