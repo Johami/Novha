@@ -1,7 +1,34 @@
+from functools import wraps
+
 from flask import Blueprint, jsonify, request
+from flask_jwt_extended import jwt_required, get_jwt
+
 from db import get_sql, get_mongo
 
 api = Blueprint("api", __name__, url_prefix="/api")
+
+# ═══════════════════ CONTROL DE ACCESO RBAC ═══════════════════
+
+def admin_required(f):
+    """
+    Permite ejecutar una ruta únicamente a usuarios autenticados
+    cuyo rol sea admin.
+    """
+
+    @wraps(f)
+    @jwt_required()
+    def decorated_function(*args, **kwargs):
+
+        claims = get_jwt()
+
+        if claims.get("rol") != "admin":
+            return jsonify({
+                "error": "Acceso denegado. Se requieren permisos de administrador."
+            }), 403
+
+        return f(*args, **kwargs)
+
+    return decorated_function
 
 # ═══════════════════ PRODUCTOS (SQL) ═══════════════════
 
@@ -28,6 +55,7 @@ def obtener_producto(id):
     return jsonify(dict(row))
 
 @api.post("/productos")
+@admin_required
 def crear_producto():
     data = request.get_json() or {}
     if not data.get("nombre") or not data.get("categoria"):
@@ -44,6 +72,7 @@ def crear_producto():
     return jsonify(dict(row)), 201
 
 @api.put("/productos/<int:id>")
+@admin_required
 def actualizar_producto(id):
     data = request.get_json() or {}
     conn = get_sql()
@@ -64,6 +93,7 @@ def actualizar_producto(id):
     return jsonify(dict(row))
 
 @api.delete("/productos/<int:id>")
+@admin_required
 def desactivar_producto(id):
     conn = get_sql()
     cur = conn.execute("UPDATE productos SET activo = 0 WHERE id = ?", (id,))
@@ -84,6 +114,7 @@ def obtener_config(producto_id):
     return jsonify(doc)
 
 @api.post("/configuraciones")
+@admin_required
 def crear_config():
     data = request.get_json() or {}
     pid = data.get("producto_id")
@@ -106,6 +137,7 @@ def crear_config():
     return jsonify(doc), 201
 
 @api.put("/configuraciones/<int:producto_id>")
+@admin_required
 def actualizar_config(producto_id):
     data = request.get_json() or {}
     result = get_mongo().configuraciones.update_one(
@@ -120,6 +152,7 @@ def actualizar_config(producto_id):
     return jsonify({"mensaje": "Configuración actualizada"})
 
 @api.delete("/configuraciones/<int:producto_id>")
+@admin_required
 def eliminar_config(producto_id):
     result = get_mongo().configuraciones.delete_one({"_id": producto_id})
     if result.deleted_count == 0:
