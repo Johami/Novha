@@ -50,7 +50,7 @@ def init():
     conn.commit()
     conn.close()
     print("✅ Base de datos lista: novha.db")
-    print("✅ Tabla usuarios creada (vacía, para Entrega JWT)")
+    print("✅ Tabla usuarios verificada correctamente")
 
 if __name__ == "__main__":
     init()
